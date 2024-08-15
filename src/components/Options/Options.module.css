@@ -1,0 +1,15 @@
+.sectionOptions{
+     display: flex;
+     gap: 5px;
+     padding-top: 18px;
+}
+
+.button {
+     cursor: pointer;
+     padding: 3px 8px;
+}
+
+.button:hover{
+background-color: rgb(204, 204, 204);
+border-radius: 3px;
+}
