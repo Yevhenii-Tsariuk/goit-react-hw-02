@@ -19,15 +19,25 @@ export default function App(){
   
   const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
   
+  const positiveFeedback = feedback.good + feedback.bad > 0 
+  ? Math.round((feedback.good / (feedback.good + feedback.bad)) * 100)
+  : 0;
+
+  const updateFeedback = (feedbackType) => {
+    setFeedback((prevFeedback) => ({
+      ...prevFeedback,
+      [feedbackType]: prevFeedback[feedbackType] + 1
+    }));
+  };
   
   return(
     <div className={css.container}>
    <Description /> 
 
-   <Options setFeedback={setFeedback} totalFeedback={totalFeedback} />
+   <Options totalFeedback={totalFeedback} updateFeedback={updateFeedback} resetFeedback={() => setFeedback({ good: 0, neutral: 0, bad: 0 })}/>
  
    {totalFeedback > 0 ? (
-        <Feedback feedback={feedback} totalFeedback={totalFeedback} />
+        <Feedback feedback={feedback} totalFeedback={totalFeedback} positiveFeedback={positiveFeedback}/>
       ) : (
         <Notification message="No feedback given" />
       )}
